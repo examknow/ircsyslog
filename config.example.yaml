@@ -1,0 +1,19 @@
+server: irc.libera.chat:+6697
+nickname: launchd-syslog
+channel:  "#services"
+
+reportformat: '[$severity] ($hostname) $process: $message'
+processbl:
+  # prevent spammy processes from making a scene (optional)
+  - '^CRON\[\d+\]$'
+  - '^systemd\[\d+\]$'
+
+messagebl:
+  # prevent spammy log messages from making a scene (optional)
+  - '^this really annoying message$'
+
+# optional settings
+#password: syslogs:hunter2
+#sasl:
+#  username: syslogs
+#  password: hunter2
