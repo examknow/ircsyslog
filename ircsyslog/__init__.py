@@ -20,12 +20,10 @@ class SysLogServer(object):
     def snuffed(self, vars: Dict):
         for pattern in self.config.processbl:
             if pattern.search(vars["process"]):
-                print(f"blocked due to prcbl {pattern.pattern}")
                 return True
 
         for pattern in self.config.messagebl:
             if pattern.search(vars["message"]):
-                print(f"blocked due to msgbl {pattern.pattern}")
                 return True
 
         return False
@@ -67,11 +65,6 @@ class SysLogServer(object):
     async def run(self):
         server = await asyncio.start_server(
             self._handle, "10.48.0.1", 11514)
-
-        addrs = ", ".join(
-            f"{sock.getsockname()[0]}:{sock.getsockname()[1]}"
-            for sock in server.sockets
-        )
 
         async with server:
             await server.serve_forever()
