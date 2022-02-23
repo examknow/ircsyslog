@@ -15,6 +15,8 @@ class Config(object):
     reportformat: str
     processbl: List[Pattern]
     messagebl: List[Pattern]
+    listen_addr: str
+    listen_port: int
 
     password: Optional[str]
     sasl: Optional[Tuple[str, str]]
@@ -28,6 +30,8 @@ def load(filepath: str):
     server   = config_yaml["server"]
     hostname, port_s = server.split(":", 1)
     tls      = False
+
+    listen_addr, listen_port = config_yaml["listen"].split(":")
 
     if port_s.startswith("+"):
         tls    = True
@@ -48,6 +52,8 @@ def load(filepath: str):
         config_yaml["reportformat"],
         [re_compile(pattern) for pattern in config_yaml.get("processbl", [])],
         [re_compile(pattern) for pattern in config_yaml.get("messagebl", [])],
+        listen_addr,
+        listen_port,
         config_yaml.get("password", None),
         sasl
     )

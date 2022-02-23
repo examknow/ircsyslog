@@ -64,7 +64,10 @@ class SysLogServer(object):
 
     async def run(self):
         server = await asyncio.start_server(
-            self._handle, "10.48.0.1", 11514)
+            self._handle,
+            self.config.listen_addr,
+            self.config.listen_port
+        )
 
         async with server:
             await server.serve_forever()

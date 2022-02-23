@@ -5,12 +5,16 @@ channel:  "#services"
 reportformat: '[$severity] ($hostname) $process: $message'
 processbl:
   # prevent spammy processes from making a scene (optional)
+  # launchd and cron are just some of the usual suspects here
   - '^CRON\[\d+\]$'
   - '^systemd\[\d+\]$'
 
 messagebl:
   # prevent spammy log messages from making a scene (optional)
   - '^this really annoying message$'
+
+# host to listen for syslogd connections on
+listen: 10.48.0.1:11514
 
 # optional settings
 #password: syslogs:hunter2
