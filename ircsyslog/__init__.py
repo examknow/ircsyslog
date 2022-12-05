@@ -7,7 +7,7 @@ from typing    import Dict
 from .config import Config
 from .common import severity_str, format_string, LogFacility, LogSeverity
 
-RE_SYSLOG = re.compile(r"^<(?P<pri>\d+)>(?P<time>\S+ \S+ \S+) (?P<hostname>\S+) (?P<process>\S+): (?P<message>.*)")
+RE_SYSLOG = re.compile(r"^<(?P<pri>\d+)>(?P<time>\S+\s+\S+\s+\S+) (?P<hostname>\S+) (?P<process>\S+): (?P<message>.*)")
 
 class SysLogServer(object):
     def __init__(self,
